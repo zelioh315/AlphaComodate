@@ -164,6 +164,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
         Spatie\Geocoder\GeocoderServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
 
         /*
@@ -234,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'GMaps'=>Geocoder\Laravel\Providers\GeocoderService::class,
         'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
+        'Location' => Stevebauman\Location\LocationServiceProvider::class,
 
 
     ],

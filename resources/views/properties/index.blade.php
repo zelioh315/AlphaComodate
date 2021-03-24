@@ -3,11 +3,12 @@
 @section('content')
 <br>
 <div class="col-sm-14">
+  <div class="panel panel-default">
     <div class="card bg-secondary text-white">
         <form method="get" action="{{url('/properties/radius/cityLng/cityLat')}}">
             @csrf
             <div class="form-row align-items-center">
-              <div class="col-auto">
+              <div class="col-md-3 offset-md-2">
                 {{-- <label class="sr-only" for="inlineFormInput">place</label> --}}
                 <label for="location">Location</label>
                  <div class="input-group mb-2">
@@ -15,7 +16,7 @@
                       <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf124;</i></div>
                     </div>
                 {{-- <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe"> --}}
-                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="22" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" required autocomplete="searchTextField"/>  
+                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="57" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" required autocomplete="searchTextField"/>  
                                  @error('searchTextField')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -26,7 +27,7 @@
                 <input type="hidden" id="cityLng" name="cityLng" />
               </div>
               </div>
-              <div class="col-auto">
+              <div class="col-md-3 offset-md-0">
                 <label for="Radius">Search radius</label>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
@@ -35,6 +36,7 @@
                   </div>
                   {{-- <input type="text" class="form-control" name="radius" size="3" id="inlineFormInputGroup" placeholder="radius"> --}}
                   <select class="form-control" name="radius">
+                    <option value="Any">Any</option>
                     <option value="1">1 mile</option>
                     <option value="3">3 miles</option>
                     <option value="5">5 miles</option>
@@ -42,11 +44,32 @@
                     <option value="9">9 mile</option>
                     <option value="11">11 miles</option>
                     <option value="13">13 miles</option>
-                    <option value="15">15+ miles</option>
+                    <option value="15+">15+ miles</option>
                   </select>
                 </div>
               </div>
-              <div class="col-auto">
+
+              <div class="col-md-3 offset-md-0">
+                <label for="num_beds">Bedrooms</label>
+                {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
+                  </div>
+                  {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
+                  <select class="form-control" name="bedrooms" >
+                    <option value="Any" selected="selected">Any</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+              <div class="form-row align-items-center">
+              <div class="col-md-3 offset-md-1">
                 <label for="min_price">Minimum Price</label>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
@@ -122,7 +145,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-auto">
+              <div class="col-md-3 offset-md-0">
                 <label for="max_price">Maximum Price</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -197,25 +220,8 @@
                   </select>
               </div>
             </div>
-              <div class="col-auto">
-                <label for="num_beds">Bedrooms</label>
-                {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
-                  </div>
-                  {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
-                  <select class="form-control" name="bedrooms" >
-                    <option value="" selected="selected">Any</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5+</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-auto">
+              
+              <div class="col-md-3 offset-md-0">
                 <label for="property_type">Property Type</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -223,20 +229,22 @@
                 </div>
                 {{-- <input type="text" class="form-control" name="property_type" size="5" id="inlineFormInputGroup" placeholder="property type"> --}}
                 <select class="form-control" name="property_type">
-                    <option value="" selected="selected">show all</option>
-                    <option value="Flat/Apartment" >Flat/Apartment</option>
-                    <option value="Student lets" >Student lets</option>
-                    <option value="Studio" >Studio</option>
-                    <option value="House" >House</option>
+                    <option value="show all" selected="selected">show all</option>
+                    <option value="flat/apartment" >Flat/Apartment</option>
+                    <option value="student lets" >Student lets</option>
+                    <option value="studio" >Studio</option>
+                    <option value="house" >House</option>
                   </select>
-              </div>
+                </div>
             </div>
-              <div class="col-auto" style='left: 50%;' >
-                <button type="submit" class="btn btn-info btn-lg" >Search</button>
-              </div>
+            <div class="col-md-3 offset-md-5"  >
+              <button type="submit" class="btn btn-info btn-lg" >Search</button>
+            </div>
+              
             </div>
           </form>       
     </div>
+  </div>
 </div>
     <br>
 
@@ -254,7 +262,7 @@
                             @if(count($p->photos)> 0)
                                 @foreach ( $p->photos as $file )
                                     @if($file->properties_id== $p->id)
-                                        <img style="width:100%"src="/storage/cover_images/{{$file->filename}}">
+                                    <a href = "/properties/{{$p->id}}"><img style="width:100%"src="/storage/cover_images/{{$file->filename}}"></a>
                                         @break
                                     @endif
                                 @endforeach
@@ -267,28 +275,47 @@
                                 <h2>£{{$p->price}} pcm</h2>
                             </div>
                             <div class = "column ">
-                                <a href="#" class="btn btn-secondary">
+                                <a href="/properties/propertyonmap/{{$p->id}}" >
                                     <i style='font-size:24px' class='fas'>&#xf3c5;</i> {{$p->region}}
                                   </a>                                   
                             </div>
                         </div>
-                        <h3><a href = "/properties/{{$p->id}}">{{$p->header}}</a></h3>
-                        <p>{!! $description!!}...</p>
+                        <h3><a href = "/properties/{{$p->id}}">{{ucwords($p->header)}}</a></h3>
+                        <p>{{ ucfirst($description)}}...</p>
                         <div class ="row justify-content-around">
-                            <h5><i style='font-size:24px' class='fas'>&#xf015;</i> {{$p->property_type}}</h5>
-                            <h5><i style='font-size:24px' class='fas'>&#xf236;</i> {{$p->number_of_rooms}}</h5>
-                            <h5><i style='font-size:24px' class='fas'>&#xf2cd;</i> {{$p->number_of_baths}}</h5>
+                            <h5>Type: <i style='font-size:24px' class='fas'>&#xf015;</i> {{$p->property_type}}</h5>
+                            <h5>Rooms: <i style='font-size:24px' class='fas'>&#xf236;</i> {{$p->number_of_rooms}}</h5>
+                            <h5>Bath: <i style='font-size:24px' class='fas'>&#xf2cd;</i> {{$p->number_of_baths}}</h5>
                         </div>
                     </div>
                 </div>
             </div> 
             <div class="card-footer">
-                <small>Listed on {{$p->created_at}} by <a href = "/profile/{{$p->user['id']}}">{{$p->user['name']}}</a></small>
+              <div class="row">
+                <div class="col-md-4">
+                    @php
+                    $now = time();
+                    $created = strtotime($p->created_at);
+                    $diff = $now - $created;
+                    $days = round($diff/(60*60*24));
+                @endphp
+              
+                  <small>Listed {{$days}} days ago by <a href = "/profile/{{$p->user['id']}}">{{ucwords($p->user['name'])}}</a></small>
+                </div>
+                <div class="col-md-4 offset-md-4">
+                  @if($p->user['mobile'] != null)
+                  <i style='font-size:20px' class='fas'>&#xf879;</i> <a href ="tel:{{$p->user['mobile']}}"> {{$p->user['mobile']}}</a>
+                 @endif
+                </div>
+              </div>
             </div>            
         </div> 
         <br> 
         @endforeach
     @else 
-        <p>No Properties to display</p>
-    @endif         
+        <p>No Properties found. Please Refine your search and try again.</p>
+    @endif    
+    <div class="d-flex justify-content-center">
+      {!! $properties->links() !!}
+  </div>     
 @endsection

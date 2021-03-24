@@ -27,6 +27,7 @@
         "php-http/curl-client": "^2.2",
         "pusher/pusher-php-server": "^5.0",
         "spatie/geocoder": "^3.10",
+        "stevebauman/location": "^6.1",
         "toin0u/geocoder-laravel": "^4.3"
     },
     

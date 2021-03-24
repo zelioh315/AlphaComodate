@@ -71,10 +71,10 @@
                     </a>                                   
               </div>
           </div>
-            <h3>{{$properties->header  }} (£{{$properties->price}} pcm)</h3>
+            <h3>{{ucwords($properties->header)  }} (£{{$properties->price}} pcm)</h3>
           
             {{-- <blockquote class="blockquote mb-0"> --}}
-              <p> {!!$properties->Description!!}</p>
+              <p> {{ucfirst($properties->Description)}}</p>
               @php
                   $feat = $properties->features;
                   $pieces = explode("  ", $feat);
@@ -96,7 +96,13 @@
             {{-- </blockquote> --}}
           </div>
           <div class="card-footer text-muted">
-              <small>Listed on {{$properties->created_at}}</small>
+              @php
+                  $now = time();
+                  $created = strtotime($properties->created_at);
+                  $diff = $now - $created;
+                  $days = round($diff/(60*60*24));
+              @endphp
+              <small>Listed {{$days}} days ago</small>
 
               <hr>
           @if(!Auth::guest())
@@ -195,8 +201,18 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="col-md-4">
-            <div class="card">
+     
+            <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card mb-3" >
+                              <a href = "/profile/{{$properties->user['id']}}"><img class="rounded" style="width:100% " src="/storage/cover_images/{{$properties->user['profile_picture']}}" alt="profile image "></a>
+                            </div> 
+                            <b><a href = "/profile/{{$properties->user['id']}}">{{ucwords($properties->user['name'])}}</a>   </b>
+                       </div> 
+            </div>
+            {{-- <div class="card">
                 <div class="card-header">Send an sms to landlord</div>
                 <div class="card-body">
                   {!! Form::open(['action' => 'smsController@store', 'method'=> 'POST']) !!}
@@ -220,7 +236,7 @@
                 {!! Form::close() !!}
                     
                 </div>
-            </div>
+            </div> --}}
         </div>
 
        </div>

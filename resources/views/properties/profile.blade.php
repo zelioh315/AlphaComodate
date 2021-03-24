@@ -14,9 +14,9 @@
                        </div> 
                        <div class="col-sm-6">
                         {{-- <div class="card mb-3" > --}}
-                            <h3>{{$user['name']}}</h3>
+                            <h3>{{ucwords($user['name'])}}</h3>
                             @if($user['mobile'] !=null)
-                                <h4>Mobile: {{$user['mobile']}} </h4>
+                                <h4>Contact Number: {{$user['mobile']}} </h4>
                             @endif
                             <p>Total Listings: {{count($properties)}} </p>
                         {{-- </div>     --}}
@@ -43,9 +43,18 @@
                 <li class="nav-item">
                   <a class="nav-link active" id="listing-tab" data-toggle="tab" href="#listing" role="tab" aria-controls="listing" aria-selected="true">All Listings</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                </li>
+                @if(!Auth::guest())
+                     @if(Auth::user()->id != $user["id"])
+                     <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                      </li>
+                      @endif
+                @else
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                  </li>
+                 @endif 
+
                 @if(!Auth::guest())
                 @if(Auth::user()->id == $user["id"])
                     <li class="nav-item">
@@ -60,6 +69,7 @@
                         @if(count($properties) > 0)
                             @foreach ($properties as $post)
                             <div class="col-sm-4">
+                            <a href = "/properties/{{$post->id}}">
                             <div class="card mb-3" >
                                 @foreach($post->photos as $file )
                                     @if($file->properties_id== $post->id)
@@ -68,14 +78,23 @@
                                     @endif
                                 @endforeach
                             <div class="card-body">
-                                <h5><b>{{$post->header}}</b></h5>
+                                <h5><b>{{ucwords($post->header)}}</b></h5>
+                            </a>
                                 <p class="card-text">
-                                    <b>Property Id: {{$post->id}}</b>
+                                    {{-- <b>Property Id: {{$post->id}}</b> --}}
                                     <li>{{$post->address}}</li>
                                     <li >{{$post->post_code}}</li>
                                     <li >£{{$post->price}}</li>
                                 </p>
-                                <h6>listed on {{$post->created_at}}</h6>
+                                <hr>
+                                @php
+                                    $now = time();
+                                    $created = strtotime($post->created_at);
+                                    $diff = $now - $created;
+                                    $days = round($diff/(60*60*24));
+                                @endphp
+                        
+                                <h6>Listed {{$days}} days ago</h6>
                                 @if(!Auth::guest())
                                 @if(Auth::user()->id == $post->user_id)
                                       <a href = "/properties/{{$post->id}}/edit" class="btn btn-default">Edit</a>
@@ -88,7 +107,8 @@
                               @endif
                               
                             </div>
-                        </div>
+                          </div>
+                        
                             </div>
                     
                             @endforeach 

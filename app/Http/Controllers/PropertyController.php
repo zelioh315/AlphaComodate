@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Pagination\Paginator;
 use Geocoder\Laravel\Facades\GMaps;
 use Geocoder\Laravel\Providers\GeocoderService;
 use Illuminate\Http\Request;
@@ -22,10 +22,22 @@ class PropertyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index', 'show','gettingProperties' ]]);
+        $this->middleware('auth',['except'=>['index', 'show','gettingProperties','propertyonmap','propertiesOnLocation' ]]);
+    }
+    public function propertiesOnLocation(Request $request){
+        $userIp = '5.151.5.251';
+        $locationData = \Location::get($userIp);
+        dd($locationData);
+
+        // return view('pages.forsale')->with('locationData',$locationData);
     }
 
     public function gettingProperties(Request $request){
+        $userIp = $request->ip();
+        $locationData = \Location::get($userIp);
+        $latit  = $locationData['latitude'];
+        $longi = $locationData['longitude'];
+
         $client = new \GuzzleHttp\Client();
 
         $geocoder = new Geocoder($client);
@@ -42,48 +54,95 @@ class PropertyController extends Controller
         $max_price = $request->max_price;
         $rooms =$request->bedrooms;
         $prop_type = $request->property_type;
-        $address  = $geocoder->getCoordinatesForAddress($addr);
-        $lt= $address['lat'];
-        $ln = $address['lng'];
-        if($lat == null){
-            $lat = $ln;
-            $lng =$lt;
+        if($addr != null){
+            $address  = $geocoder->getCoordinatesForAddress($addr);
+            $lt= $address['lat'];
+            $ln = $address['lng'];
+            if($lat == null){
+                $lat = $ln;
+                $lng =$lt;}
         }
+   
+
+        $max_p = $max_price;
+        $min_p = $min_price;
+        $bed = $rooms;
+        $prop = $prop_type;
+        // if($lat == null){
+        //     $lat = $ln;
+        //     $lng =$lt;}
+        if($lat == null){
+            $lat = $longi;
+            $lng =$latit;
+        }
+        
+        
+        if($rooms == null || $rooms == 5 ){
+            $bed = 5;
+        }
+        if($max_price == null){
+            $max_p = 20000;
+        }
+        if($min_price == null){
+            $min_p = 100;
+        }
+        
         $sql_distance = " ,(((acos(sin((".$lat."*pi()/180)) * sin((`properties`.`latitude`*pi()/180))+cos((".$lat."*pi()/180)) * cos((`properties`.`latitude`*pi()/180)) * cos(((".$lng."-`properties`.`longitude`)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance "; 
-        if ($radius == 15){
+        if ($radius == '15+' || $radius == 'Any'){
             $having = " HAVING (distance ) "; 
         }else{
             $having = " HAVING (distance <= $radius) "; 
         }
-        if($min_price == null && $max_price == null ){
-            if ($rooms == null || $rooms == 5){
-                $where =   "WHERE ( number_of_rooms<1000 )";   
-            }else{
-                $where =   "WHERE ( number_of_rooms=$rooms )";   
-            }      
-        }else if($min_price != null ){
-            if ($rooms == null || $rooms == 5){
-                $where =   "WHERE ( number_of_rooms<1000 and price >= $min_price)";  
-            }else{
-                $where =   "WHERE ( number_of_rooms=$rooms and price >= $min_price)";    
-            }   
+        // if($min_price == null && $max_price == null ){
+        //     if ($rooms == null || $rooms == 5){
+        //         $where =   "WHERE ( number_of_rooms<1000 )";   
+        //     }else{
+        //         $where =   "WHERE ( number_of_rooms=$rooms )";   
+        //     }      
+        // }else if($min_price != null ){
+        //     if ($rooms == null || $rooms == 5){
+        //         $where =   "WHERE ( number_of_rooms<1000 and price >= $min_price)";  
+        //     }else{
+        //         $where =   "WHERE ( number_of_rooms=$rooms and price >= $min_price)";    
+        //     }   
             
-        }else if($max_price != null ){
-            if ($rooms == null || $rooms == 5){
-                $where =   "WHERE ( number_of_rooms<1000 and price <= $max_price)";  
+        // }else if($max_price != null ){
+        //     if ($rooms == null || $rooms == 5){
+        //         $where =   "WHERE ( number_of_rooms<1000 and price <= $max_price)";  
+        //     }else{
+        //         $where =   "WHERE ( number_of_rooms=$rooms and price <= $max_price)";    
+        //     }  
+        // }
+            if ($rooms == 'Any' ){
+                if ($prop_type == 'show all'){
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p )";
+                }else{
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p and property_type='$prop')";
+                }
+            }else if ($rooms == '+5'){
+                if ($prop_type == 'show all'){
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p and number_of_rooms>5 )";
+                }else{
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p and property_type='$prop' and number_of_rooms>5)";
+                }
             }else{
-                $where =   "WHERE ( number_of_rooms=$rooms and price <= $max_price)";    
-            }  
-        }
-        else {
-            $where =   "WHERE ( price BETWEEN $min_price AND $max_price and number_of_rooms=$rooms )";
-        }
+                if ($prop_type == 'show all'){
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p and number_of_rooms=$rooms)";
+                }else{
+                    $where =   "WHERE ( price BETWEEN $min_p AND $max_p and number_of_rooms=$rooms and property_type='$prop')";
+                }
+               
+            }
+                
+            
+        
 
     $order_by = ' distance ASC '; 
     $photos=Photos::get();
     $user = User::get();
     $properties = DB::select("SELECT  *".$sql_distance." FROM properties $where $having ORDER BY $order_by"); 
-
+    
+            
        return view('pages.forRent')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr, 'min_price'=>$min_price, 'max_price'=>$max_price,'radius'=>$radius, 'rooms'=>$rooms, 'prop_type'=>$prop_type]);
     }
 
@@ -96,7 +155,7 @@ class PropertyController extends Controller
     {
 
 
-       $properties =  properties::orderBy('created_at', 'desc')->paginate(10);  
+       $properties =  properties::orderBy('created_at', 'desc')->paginate(5);  
 
     //   $properties= properties::whereHas('photos','user',function($query){
     //     $query->where('id', 44);
@@ -194,6 +253,23 @@ class PropertyController extends Controller
        $address = $geocoder->getCoordinatesForAddress($properties->post_code);
        // with(['properties'=> $user->properties, 'propertiesForRent'=>$user->propertiesForRent])
         return view('properties.show')->with(['properties'=>$properties, 'address'=>$address]);
+    }
+
+    public function propertyonmap($id)
+    {
+        $properties =  properties::find($id);
+
+        $client = new \GuzzleHttp\Client();
+
+        $geocoder = new Geocoder($client);
+       
+        $geocoder->setApiKey(config('geocoder.key'));
+       
+        $geocoder->setCountry(config('geocoder.country', 'UK'));
+       
+       $address = $geocoder->getCoordinatesForAddress($properties->post_code);
+       // with(['properties'=> $user->properties, 'propertiesForRent'=>$user->propertiesForRent])
+        return view('properties.prop_on_map')->with(['properties'=>$properties, 'address'=>$address]);
     }
 
 

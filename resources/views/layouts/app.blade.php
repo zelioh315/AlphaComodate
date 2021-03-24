@@ -145,6 +145,10 @@
             border: 1px solid #aaaaaa;
         } */
      </style>
+     <script>
+         $('#myModal').modal('show');
+// www.jquery2dotnet.com
+         </script>
 
     
 </head>

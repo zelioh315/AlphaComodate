@@ -19,15 +19,23 @@ Route::get('/demo', function () {
     Mail::to('chiatiah@gmail.com')->send(new App\Mail\EmailFromAPotentialTenant());
     return new App\Mail\EmailFromAPotentialTenant();
 });
+
+// Route::get('get-location-from-ip',function(){
+//     $ip= \Request::ip();
+//     $data = \Location::get($ip);
+//     dd($data);
+// });
 Route::get('/properties/{id}/Sendemail', 'PagesController@sendAnEmail');
 // Route::get('/properties/{id}/pictureUpload', 'PagesController@pictureUpload');
 Route::get('/students', 'PagesController@students');
 Route::get('/forSale', 'PagesController@forSale');
 Route::get('/servicedAccomodations', 'PagesController@servicedAccomodations');
 Route::get('/googlemap', 'MapController@map');
+Route::get('/properties-on-location', 'PropertyController@propertiesOnLocation');
 
 Route::resource('properties', 'PropertyController');
 Route::get('/properties/{radius}/{lng}/{lat}', 'PropertyController@gettingProperties');
+Route::get('/properties/propertyonmap/{id}', 'PropertyController@propertyonmap');
 Route::resource('propertiesForRent', 'PropertyForRentController');
 Route::resource('email', 'emailController');
 Route::resource('sendsms', 'smsController');

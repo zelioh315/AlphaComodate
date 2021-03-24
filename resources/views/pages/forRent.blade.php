@@ -211,7 +211,7 @@
                   {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
                   <select class="form-control" name="bedrooms">
                     <option value="{{$rooms}}"  selected="selected">{{$rooms}}</option>
-                    <option value="">Any</option>
+                    <option value="Any">Any</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -229,10 +229,11 @@
                 {{-- <input type="text" class="form-control" name="property_type" size="5" id="inlineFormInputGroup" placeholder="property type"> --}}
                 <select class="form-control" name="property_type">
                   <option value="{{$prop_type}}"  selected="selected">{{$prop_type}}</option>
-                    <option value="">show all</option>
-                    <option value="houses" >Houses</option>
-                    <option value="flats" >Flats</option>
-                    <option value="Studios" >Studios</option>
+                  <option value="flat/apartment" >Flat/Apartment</option>
+                  <option value="student lets" >Student lets</option>
+                  <option value="studio" >Studio</option>
+                  <option value="house" >House</option>
+                  <option value="show all">show all</option>
                   </select>
               </div>
             </div>
@@ -299,6 +300,9 @@
         <br> 
         @endforeach
     @else 
-        <h3>No listings for "{{$addr}}"<h3>
-    @endif         
+        <h3>No listings found.Please refine your search and try again.<h3>
+    @endif  
+    <div class="d-flex justify-content-center">
+      {{-- {!! $properties->render() !!} --}}
+  </div>        
 @endsection
