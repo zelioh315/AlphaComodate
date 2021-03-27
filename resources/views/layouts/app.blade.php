@@ -30,6 +30,7 @@
      <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
      <style>
+         /* <a style="text-decoration: none;"></a> */
          /* width */
         ::-webkit-scrollbar {
             width: 7px;
@@ -160,6 +161,7 @@
             <div class="container">
                 @include('inc.messages')
             @yield('content')
+            @include('inc.footbar')
         </main>
     </div>
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>

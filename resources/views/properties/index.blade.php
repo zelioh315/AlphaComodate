@@ -16,7 +16,7 @@
                       <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf124;</i></div>
                     </div>
                 {{-- <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe"> --}}
-                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="57" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" required autocomplete="searchTextField"/>  
+                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="57" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" value = "{{$addr}}" required autocomplete="searchTextField"/>  
                                  @error('searchTextField')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,6 +36,7 @@
                   </div>
                   {{-- <input type="text" class="form-control" name="radius" size="3" id="inlineFormInputGroup" placeholder="radius"> --}}
                   <select class="form-control" name="radius">
+                    <option value="{{$radius}}">{{$radius}} miles</option>
                     <option value="Any">Any</option>
                     <option value="1">1 mile</option>
                     <option value="3">3 miles</option>
@@ -58,6 +59,7 @@
                   </div>
                   {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
                   <select class="form-control" name="bedrooms" >
+                    <option value="{{$rooms}}"  selected="selected">{{$rooms}}</option>
                     <option value="Any" selected="selected">Any</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -78,6 +80,7 @@
                   </div>
                   {{-- <input type="text" class="form-control" name="min_price" size="5" id="inlineFormInputGroup" placeholder="min price"> --}}
                   <select class="form-control" name="min_price">
+                    <option value="{{$min_price}}"  selected="selected">{{$min_price}} pcm</option>
                     <option value="">No min</option>
                     <option value="100"  data-condensed="100">&pound;100 pcm</option>
                     <option value="200"  data-condensed="200">&pound;200 pcm</option>
@@ -153,6 +156,7 @@
                 </div>
                 {{-- <input type="text" class="form-control" name="max_price" size="5" id="inlineFormInputGroup" placeholder="max price"> --}}
                 <select class="form-control" name="max_price">
+                  <option value="{{$max_price}}"  selected="selected">{{$max_price}} pcm</option>
                     <option value="">No max</option>
                     <option value="100"  data-condensed="100">&pound;100 pcm</option>
                     <option value="200"  data-condensed="200">&pound;200 pcm</option>
@@ -229,6 +233,7 @@
                 </div>
                 {{-- <input type="text" class="form-control" name="property_type" size="5" id="inlineFormInputGroup" placeholder="property type"> --}}
                 <select class="form-control" name="property_type">
+                  <option value="{{$prop_type}}"  selected="selected">{{$prop_type}}</option>
                     <option value="show all" selected="selected">show all</option>
                     <option value="flat/apartment" >Flat/Apartment</option>
                     <option value="student lets" >Student lets</option>
@@ -259,8 +264,8 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="well">
-                            @if(count($p->photos)> 0)
-                                @foreach ( $p->photos as $file )
+                            @if(count($photos)> 0)
+                                @foreach ( $photos as $file )
                                     @if($file->properties_id== $p->id)
                                     <a href = "/properties/{{$p->id}}"><img style="width:100%"src="/storage/cover_images/{{$file->filename}}"></a>
                                         @break
@@ -299,13 +304,31 @@
                     $diff = $now - $created;
                     $days = round($diff/(60*60*24));
                 @endphp
+                @foreach ( $user as $u )
+                  @if($u->id== $p->user_id)
+                  <small>Listed {{$days}} days ago by <a href = "/profile/{{$u->id}}">{{ucwords($u->name)}}</a></small>
+                  @endif
+                @endforeach
               
-                  <small>Listed {{$days}} days ago by <a href = "/profile/{{$p->user['id']}}">{{ucwords($p->user['name'])}}</a></small>
+                  {{-- <small>Listed {{$days}} days ago by <a href = "/profile/{{$p->user['id']}}">{{ucwords($p->user['name'])}}</a></small> --}}
                 </div>
-                <div class="col-md-4 offset-md-4">
-                  @if($p->user['mobile'] != null)
-                  <i style='font-size:20px' class='fas'>&#xf879;</i> <a href ="tel:{{$p->user['mobile']}}"> {{$p->user['mobile']}}</a>
-                 @endif
+                <div class="col-md-2 offset-md-3">
+                  @foreach ( $user as $u )
+                      @if($u->id== $p->user_id)
+                        @if ($u->mobile !=null)
+                        <i style='font-size:20px' class='fas'>&#xf879;</i> <a href ="tel:{{$u->mobile}}"> {{$u->mobile}}</a>
+                        @endif
+                      @endif
+                   @endforeach
+                 
+                </div>
+                <div class="col-md-2 offset-md-0">
+                  @foreach ( $user as $u )
+                    @if($u->id== $p->user_id)
+                    <a href = "/properties/{{$p->id}}/Sendemail"> <i style="font-size:24px" class="fa">&#xf0e0;</i> Contact</a>
+                    @endif
+                @endforeach
+
                 </div>
               </div>
             </div>            
@@ -316,6 +339,6 @@
         <p>No Properties found. Please Refine your search and try again.</p>
     @endif    
     <div class="d-flex justify-content-center">
-      {!! $properties->links() !!}
+      {{-- {!! $properties->links() !!} --}}
   </div>     
 @endsection

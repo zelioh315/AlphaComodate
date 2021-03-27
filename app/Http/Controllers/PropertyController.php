@@ -22,17 +22,31 @@ class PropertyController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index', 'show','gettingProperties','propertyonmap','propertiesOnLocation' ]]);
+        $this->middleware('auth',['except'=>['index', 'show','gettingProperties','propertyonmap','propertiesOnLocation','propertyCities' ]]);
     }
     public function propertiesOnLocation(Request $request){
-        $userIp = '5.151.5.251';
-        $locationData = \Location::get($userIp);
-        dd($locationData);
+        // $userIp = '5.151.5.251';
+        // $locationData = \Location::get($userIp);
+        // dd($locationData);
+        // $location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
+        // print_r($location);
+        $userIp = $request->ip();
+        $res = file_get_contents('https://www.iplocate.io/api/lookup/$userIp');
+        $res = json_decode($res);
+
+        echo $res->country; // United States
+        echo $res->continent; // North America
+        echo $res->latitude; // 37.751
+        echo $res->longitude; // -97.822
+
+        var_dump($res);
 
         // return view('pages.forsale')->with('locationData',$locationData);
     }
 
     public function gettingProperties(Request $request){
+        $this->validate($request,[
+            'searchTextField' => 'required']);
         $userIp = $request->ip();
         $locationData = \Location::get($userIp);
         $latit  = $locationData['latitude'];
@@ -93,26 +107,6 @@ class PropertyController extends Controller
         }else{
             $having = " HAVING (distance <= $radius) "; 
         }
-        // if($min_price == null && $max_price == null ){
-        //     if ($rooms == null || $rooms == 5){
-        //         $where =   "WHERE ( number_of_rooms<1000 )";   
-        //     }else{
-        //         $where =   "WHERE ( number_of_rooms=$rooms )";   
-        //     }      
-        // }else if($min_price != null ){
-        //     if ($rooms == null || $rooms == 5){
-        //         $where =   "WHERE ( number_of_rooms<1000 and price >= $min_price)";  
-        //     }else{
-        //         $where =   "WHERE ( number_of_rooms=$rooms and price >= $min_price)";    
-        //     }   
-            
-        // }else if($max_price != null ){
-        //     if ($rooms == null || $rooms == 5){
-        //         $where =   "WHERE ( number_of_rooms<1000 and price <= $max_price)";  
-        //     }else{
-        //         $where =   "WHERE ( number_of_rooms=$rooms and price <= $max_price)";    
-        //     }  
-        // }
             if ($rooms == 'Any' ){
                 if ($prop_type == 'show all'){
                     $where =   "WHERE ( price BETWEEN $min_p AND $max_p )";
@@ -143,7 +137,19 @@ class PropertyController extends Controller
     $properties = DB::select("SELECT  *".$sql_distance." FROM properties $where $having ORDER BY $order_by"); 
     
             
-       return view('pages.forRent')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr, 'min_price'=>$min_price, 'max_price'=>$max_price,'radius'=>$radius, 'rooms'=>$rooms, 'prop_type'=>$prop_type]);
+       return view('properties.index')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr, 'min_price'=>$min_price, 'max_price'=>$max_price,'radius'=>$radius, 'rooms'=>$rooms, 'prop_type'=>$prop_type]);
+    }
+
+    public function propertyCities($city)
+    {   $addr = $city;
+        $photos=Photos::get();
+        $user = User::get();
+        $where =   "WHERE ( City=$city)";
+        // $properties =  properties::find($city);
+        $properties = DB::select("SELECT * FROM properties WHERE (City= '$city')");
+
+       // with(['properties'=> $user->properties, 'propertiesForRent'=>$user->propertiesForRent])
+       return view('properties.cities')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr]);
     }
 
     /**
@@ -155,12 +161,12 @@ class PropertyController extends Controller
     {
 
 
-       $properties =  properties::orderBy('created_at', 'desc')->paginate(5);  
+       $properties =  properties::get();  
 
     //   $properties= properties::whereHas('photos','user',function($query){
     //     $query->where('id', 44);
     //   } );
-      return view('properties.index')->with('properties',$properties);
+      return view('pages.forRent')->with('properties',$properties);
     }
 
     /**
@@ -271,8 +277,6 @@ class PropertyController extends Controller
        // with(['properties'=> $user->properties, 'propertiesForRent'=>$user->propertiesForRent])
         return view('properties.prop_on_map')->with(['properties'=>$properties, 'address'=>$address]);
     }
-
-
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,105 +1,25 @@
 @extends('layouts.app')
-   
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<style>
-    /* body, html {
-      height: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-    } */
-    
-    * {
-      box-sizing: border-box;
-    }
-    
-    .bg-img {
-      /* The image used */
-      background-image: url("/storage/wallpaper/alpha.jpg" );
-      height: 100%; 
-
-    
-      /* min-height: 380px; */
-    
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-      /* background-size: 100%; */
-      
-    }
-    
-    /* Add styles to the form container */
-    .homepage {
-      position: absolute;
-      left: 25%;
-      margin: 20px;
-      max-width: 650px;
-      max-height: 1000px;
-      padding: 16px;
-      /* background-color: #f7f7ab; */
-      background: rgba(230, 225, 241, 0.35);
-     
-      
-    }
-    
-    /* Full-width input fields */
-    /* input[type=text], input[type=password] {
-      width: 100%;
-      padding: 15px;
-      margin: 5px 0 22px 0;
-      border: none;
-      background: #f1f1f1;
-    } */
-    
-    /* input[type=text]:focus, input[type=password]:focus {
-      background-color: #ddd;
-      outline: none;
-    } */
-    
-    /* Set a style for the submit button */
-    .btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 16px 20px;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      opacity: 0.9;
-    }
-    
-    .btn:hover {
-      opacity: 1;
-    }
-    </style>
- 
- 
-    
-    {{-- <h2>Form on Hero Image</h2> --}}
-    <div class="bg-img">
-        <br><br><br>
-        
-        <form method="get"  novalidate="novalidate" class="homepage" action="{{url('/properties/radius/cityLng/cityLat')}}">
-            <h1> Search Properties for Rent around you</h1>
+@section('content')
+<br>
+<div class="col-sm-14">
+  <div class="panel panel-default">
+    <div class="card bg-secondary text-white">
+        <form method="get" action="{{url('/properties/radius/cityLng/cityLat')}}">
             @csrf
             <div class="form-row align-items-center">
-              <div class="col-md-8 offset-md-0">
+              <div class="col-md-3 offset-md-2">
                 {{-- <label class="sr-only" for="inlineFormInput">place</label> --}}
-                <b><label for="location">Location</label></b>
+                <label for="location">Location</label>
                  <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf124;</i></div>
                     </div>
-                    @php
-                        $placeholder = ' eg. luton, peckham or se25';
-                    @endphp
                 {{-- <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe"> --}}
-                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text"  placeholder="{{$placeholder}}" autocomplete="on" runat="server"  autocomplete="searchTextField" required>  
+                <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="57" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" value = "{{$addr}}" required autocomplete="searchTextField"/>  
                                  @error('searchTextField')
                                     <span class="invalid-feedback" role="alert">
-                                      {{-- <strong> Please enter location</strong> --}}
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                 <input type="hidden" id="city2" name="city2" />
@@ -108,7 +28,7 @@
               </div>
               </div>
               <div class="col-md-3 offset-md-0">
-                <b><label for="Radius">Search radius</label></b>
+                <label for="Radius">Search radius</label>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
@@ -128,11 +48,29 @@
                   </select>
                 </div>
               </div>
-            </div>
 
+              <div class="col-md-3 offset-md-0">
+                <label for="num_beds">Bedrooms</label>
+                {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
+                  </div>
+                  {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
+                  <select class="form-control" name="bedrooms" >
+                    <option value="Any" selected="selected">Any</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
+              </div>
+            </div>
               <div class="form-row align-items-center">
-              <div class="col-md-4 offset-md-0">
-                <b><label for="min_price">Minimum Price</label></b>
+              <div class="col-md-3 offset-md-1">
+                <label for="min_price">Minimum Price</label>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
@@ -207,8 +145,8 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 offset-md-0">
-                <b><label for="max_price">Maximum Price</label></b>
+              <div class="col-md-3 offset-md-0">
+                <label for="max_price">Maximum Price</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf154;</i></div>
@@ -282,32 +220,9 @@
                   </select>
               </div>
             </div>
-              </div>
-              <div class="form-row align-items-center">
-
-                <div class="col-md-4 offset-md-0">
-                  <b><label for="num_beds">Bedrooms</label></b>
-                  {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
-                    </div>
-                    {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
-                    <select class="form-control" name="bedrooms" >
-                      <option value="Any" selected="selected">Any</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5+</option>
-                    </select>
-                  </div>
-                </div>
-                
               
-              
-              <div class="col-md-4 offset-md-0">
-                <b><label for="property_type">Property Type</label></b>
+              <div class="col-md-3 offset-md-0">
+                <label for="property_type">Property Type</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf015;</i></div>
@@ -327,11 +242,98 @@
             </div>
               
             </div>
-          </form>    
+          </form>       
     </div>
-    
-@section('content')
+  </div>
+</div>
+    <br>
 
-
+    @if(count($properties)> 0)
+        @foreach ( $properties as $p )
+        @php
+            $descrip = $p->Description;
+            $description = substr($descrip,0,250)
+        @endphp
+        <div class="card " >
+            <div class="card-body">          
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            @if(count($photos)> 0)
+                                @foreach ( $photos as $file )
+                                    @if($file->properties_id== $p->id)
+                                    <a href = "/properties/{{$p->id}}"><img style="width:100%"src="/storage/cover_images/{{$file->filename}}"></a>
+                                        @break
+                                    @endif
+                                @endforeach
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class ="row justify-content-between">
+                            <div class = "column ">
+                                <h2>£{{$p->price}} pcm</h2>
+                            </div>
+                            <div class = "column ">
+                                <a href="/properties/propertyonmap/{{$p->id}}" >
+                                    <i style='font-size:24px' class='fas'>&#xf3c5;</i> {{$p->region}}
+                                  </a>                                   
+                            </div>
+                        </div>
+                        <h3><a href = "/properties/{{$p->id}}">{{ucwords($p->header)}}</a></h3>
+                        <p>{{ ucfirst($description)}}...</p>
+                        <div class ="row justify-content-around">
+                            <h5>Type: <i style='font-size:24px' class='fas'>&#xf015;</i> {{$p->property_type}}</h5>
+                            <h5>Rooms: <i style='font-size:24px' class='fas'>&#xf236;</i> {{$p->number_of_rooms}}</h5>
+                            <h5>Bath: <i style='font-size:24px' class='fas'>&#xf2cd;</i> {{$p->number_of_baths}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-md-4">
+                    @php
+                    $now = time();
+                    $created = strtotime($p->created_at);
+                    $diff = $now - $created;
+                    $days = round($diff/(60*60*24));
+                @endphp
+                @foreach ( $user as $u )
+                  @if($u->id== $p->user_id)
+                  <small>Listed {{$days}} days ago by <a href = "/profile/{{$u->id}}">{{ucwords($u->name)}}</a></small>
+                  @endif
+                @endforeach
+              
+                  {{-- <small>Listed {{$days}} days ago by <a href = "/profile/{{$p->user['id']}}">{{ucwords($p->user['name'])}}</a></small> --}}
+                </div>
+                <div class="col-md-2 offset-md-3">
+                  @foreach ( $user as $u )
+                      @if($u->id== $p->user_id)
+                        @if ($u->mobile !=null)
+                        <i style='font-size:20px' class='fas'>&#xf879;</i> <a href ="tel:{{$u->mobile}}"> {{$u->mobile}}</a>
+                        @endif
+                      @endif
+                   @endforeach
+                 
+                </div>
+                <div class="col-md-2 offset-md-0">
+                    @foreach ( $user as $u )
+                      @if($u->id== $p->user_id)
+                      <a href = "/properties/{{$p->id}}/Sendemail"> <i style="font-size:24px" class="fa">&#xf0e0;</i> Contact</a>
+                      @endif
+                  @endforeach
+  
+                  </div>
+              </div>
+            </div>            
+        </div> 
+        <br> 
+        @endforeach
+    @else 
+        <p>No Properties found. Please Refine your search and try again.</p>
+    @endif    
+    <div class="d-flex justify-content-center">
+      {{-- {!! $properties->links() !!} --}}
+  </div>     
 @endsection
-        

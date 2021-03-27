@@ -1,14 +1,14 @@
 
-  <nav class="navbar navbar-expand-md  fixed-top  navbar-dark ">
+  <nav class="navbar navbar-expand-md  fixed-top  navbar-light ">
   {{-- <nav class="navbar navbar-expand-lg "> --}}
     {{-- <nav class="navbar "> --}}
     <div class="container">
-        {{-- <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{url('storage/cover_images/alphalogo.png')}}" alt="logo" style="width:200px;">
-        </a> --}}
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'AlphaComodate') }}
+            <img src="{{url('storage/wallpaper/logo.png')}}" alt="logo" style="width:200px;">
         </a>
+        {{-- <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'AlphaComodate') }}
+        </a> --}}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,7 +22,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/properties">For Rent<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/properties"><b>For Rent</b><span class="sr-only">(current)</span></a>
               </li>
            
               {{-- <li class="nav-item active">
@@ -55,7 +55,7 @@
                     @endif --}}
                 @else
                     <li class="nav-item active">
-                        <a class="nav-link" href="/properties/create">Add a listing </a>
+                        <a class="nav-link" href="/properties/create"><b>Add a listing</b></a>
                     </li>
 
                     {{-- <li class="nav-item active">
@@ -87,8 +87,11 @@
             </ul>
         </div>
     </div>
+    <hr>
 </nav>
 <br>
+
+
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -268,6 +271,7 @@
         </div>
     </div>
 </div>
+
 
 
 

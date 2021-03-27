@@ -30,11 +30,12 @@ Route::get('/properties/{id}/Sendemail', 'PagesController@sendAnEmail');
 Route::get('/students', 'PagesController@students');
 Route::get('/forSale', 'PagesController@forSale');
 Route::get('/servicedAccomodations', 'PagesController@servicedAccomodations');
-Route::get('/googlemap', 'MapController@map');
+// Route::get('/googlemap', 'MapController@map');
 Route::get('/properties-on-location', 'PropertyController@propertiesOnLocation');
 
 Route::resource('properties', 'PropertyController');
 Route::get('/properties/{radius}/{lng}/{lat}', 'PropertyController@gettingProperties');
+Route::get('/properties/properties-around-you/{city}', 'PropertyController@propertyCities');
 Route::get('/properties/propertyonmap/{id}', 'PropertyController@propertyonmap');
 Route::resource('propertiesForRent', 'PropertyForRentController');
 Route::resource('email', 'emailController');

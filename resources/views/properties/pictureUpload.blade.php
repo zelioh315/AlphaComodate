@@ -5,7 +5,7 @@
 
     <h1>File Uploading</h1>
     <h2> Please upload files of your {{$properties->header}} here </h2>
-    <p> the property id is {{$properties->id}}</p>
+    {{-- <p> the property id is {{$properties->id}}</p> --}}
        
     {!! Form::open(['action' => 'PhotoController@store', 'method'=> 'POST', 'enctype'=>'multipart/form-data']) !!}
 

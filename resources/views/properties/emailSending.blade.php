@@ -44,7 +44,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">{{ $properties->header}}</div>
-                <div class="card-body">
+                <a href = "/properties/{{$properties->id}}"><div class="card-body">
                     @foreach ( $properties->photos as $file )
                                     @if($file->properties_id== $properties->id)
                                         <img class="card-img-top" src="/storage/cover_images/{{$file->filename}}" alt="Property image ">
@@ -52,13 +52,13 @@
                                         @break
                                     @endif
                                 @endforeach
-                </div>
-                <div class="card-footer">Listed on {{ $properties->created_at}}</div>
+                </div></a>
+                <div class="card-footer">Listed on {{ $properties->created_at->format('d-m-y')}}</div>
             </div>
 
             <div class="col-md-14">
                 <div class="card">
-                    <div class="card-header">my map will go here</div>
+                    <div class="card-header">Property on map</div>
                     <div class="card-body">
                         <div id="map" style="width:100%;height:400px;"></div> 
                         <script>
