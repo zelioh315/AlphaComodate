@@ -29,6 +29,7 @@ Route::get('/properties/{id}/Sendemail', 'PagesController@sendAnEmail');
 // Route::get('/properties/{id}/pictureUpload', 'PagesController@pictureUpload');
 Route::get('/students', 'PagesController@students');
 Route::get('/forSale', 'PagesController@forSale');
+Route::get('/about', 'PagesController@about');
 Route::get('/servicedAccomodations', 'PagesController@servicedAccomodations');
 // Route::get('/googlemap', 'MapController@map');
 Route::get('/properties-on-location', 'PropertyController@propertiesOnLocation');

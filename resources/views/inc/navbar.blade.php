@@ -22,6 +22,10 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
+                <a class="nav-link" href="/about"><b>About</b><span class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="nav-item active">
                 <a class="nav-link" href="/properties"><b>For Rent</b><span class="sr-only">(current)</span></a>
               </li>
            

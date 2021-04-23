@@ -2,7 +2,7 @@
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
-      <div class="row">
+      {{-- <div class="row">
         <!--Grid column-->
         <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
           <h5 class="text-uppercase">Footer Content</h5>
@@ -58,10 +58,11 @@
         <!--Grid column-->
       </div>
       <!--Grid row-->
-    </div>
+    </div> --}}
     <!-- Grid container -->
   
     <!-- Copyright -->
+    <br>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       © 2021 AlphaComodate.
       {{-- <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a> --}}

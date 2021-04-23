@@ -8,12 +8,12 @@
         <form method="get" action="{{url('/properties/radius/cityLng/cityLat')}}">
             @csrf
             <div class="form-row align-items-center">
-              <div class="col-md-3 offset-md-2">
+              <div class="col-md-3 offset-md-1">
                 {{-- <label class="sr-only" for="inlineFormInput">place</label> --}}
                 <label for="location">Location</label>
                  <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                      <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf124;</i></div>
+                      <div class="input-group-text"><i style='font-size:20px' class="material-icons">&#xe55c;</i></div>
                     </div>
                 {{-- <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe"> --}}
                 <input class="form-control @error('searchTextField') is-invalid @enderror" id="searchTextField" name="searchTextField" type="text" size="57" placeholder="eg. luton, peckham or se25" autocomplete="on" runat="server" value = "{{$addr}}" required autocomplete="searchTextField"/>  
@@ -32,7 +32,7 @@
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf4d7;</i></div>
+                    <div class="input-group-text"><i style='font-size:20px' class="material-icons">&#xe569;</i></div>
                   </div>
                   {{-- <input type="text" class="form-control" name="radius" size="3" id="inlineFormInputGroup" placeholder="radius"> --}}
                   <select class="form-control" name="radius">
@@ -54,7 +54,7 @@
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
+                    <div class="input-group-text"><i style="font-size:20px" class="material-icons">&#xe549;</i></div>
                   </div>
                   {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
                   <select class="form-control" name="bedrooms" >
@@ -74,7 +74,7 @@
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf154;</i></div>
+                    <div class="input-group-text"><i style='font-size:20px' class="fa fa-gbp"></i></div>
                   </div>
                   {{-- <input type="text" class="form-control" name="min_price" size="5" id="inlineFormInputGroup" placeholder="min price"> --}}
                   <select class="form-control" name="min_price">
@@ -149,7 +149,7 @@
                 <label for="max_price">Maximum Price</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf154;</i></div>
+                  <div class="input-group-text"><i style='font-size:20px' class="fa fa-gbp"></i></div>
                 </div>
                 {{-- <input type="text" class="form-control" name="max_price" size="5" id="inlineFormInputGroup" placeholder="max price"> --}}
                 <select class="form-control" name="max_price">
@@ -225,7 +225,7 @@
                 <label for="property_type">Property Type</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf015;</i></div>
+                  <div class="input-group-text"><i style='font-size:20px' class="fa fa-home"></i></div>
                 </div>
                 {{-- <input type="text" class="form-control" name="property_type" size="5" id="inlineFormInputGroup" placeholder="property type"> --}}
                 <select class="form-control" name="property_type">
@@ -276,16 +276,18 @@
                             </div>
                             <div class = "column ">
                                 <a href="/properties/propertyonmap/{{$p->id}}" >
-                                    <i style='font-size:24px' class='fas'>&#xf3c5;</i> {{$p->region}}
+                                    <i style='font-size:24px' class="fa fa-map-marker"></i> {{$p->region}}
                                   </a>                                   
                             </div>
                         </div>
                         <h3><a href = "/properties/{{$p->id}}">{{ucwords($p->header)}}</a></h3>
                         <p>{{ ucfirst($description)}}...</p>
                         <div class ="row justify-content-around">
-                            <h5>Type: <i style='font-size:24px' class='fas'>&#xf015;</i> {{$p->property_type}}</h5>
-                            <h5>Rooms: <i style='font-size:24px' class='fas'>&#xf236;</i> {{$p->number_of_rooms}}</h5>
-                            <h5>Bath: <i style='font-size:24px' class='fas'>&#xf2cd;</i> {{$p->number_of_baths}}</h5>
+                          <h5>Type: <i style='font-size:20px' class="fa fa-home"></i> {{$p->property_type}}</h5>
+
+                          <h5>Rooms: <i style="font-size:24px" class="fa fa-bed"></i> {{$p->number_of_rooms}}</h5>
+
+                          <h5>Baths: <i style='font-size:24px' class="fa fa-bath"></i> {{$p->number_of_baths}}</h5>
                         </div>
                     </div>
                 </div>
@@ -311,7 +313,7 @@
                   @foreach ( $user as $u )
                       @if($u->id== $p->user_id)
                         @if ($u->mobile !=null)
-                        <i style='font-size:20px' class='fas'>&#xf879;</i> <a href ="tel:{{$u->mobile}}"> {{$u->mobile}}</a>
+                        <i style='font-size:20px' class="fa fa-phone"></i> <a href ="tel:{{$u->mobile}}"> {{$u->mobile}}</a>
                         @endif
                       @endif
                    @endforeach

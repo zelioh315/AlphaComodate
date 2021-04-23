@@ -11,9 +11,11 @@
   
   .bg-img {
     /* The image used */
-    /* background-image: url("/storage/wallpaper/alpha.jpg" );
-    height: 100%;  */
-
+    background-image: url("/storage/wallpaper/alpha.jpg" );
+    height: 100%; 
+   
+    /* filter: blur(8px);
+  -webkit-filter: blur(8px); */
   
     /* min-height: 380px; */
   
@@ -25,6 +27,17 @@
     /* background-size: 100%; */
     
   }
+  .my-card{
+     background: rgba(253, 253, 253, 1);
+  }
+
+  .my-card1{
+     background: rgba(255, 255, 255, 1);
+     text-align: center;
+     
+  }
+
+
   
   /* Add styles to the form container */
   .homepage {
@@ -38,6 +51,8 @@
    
     
   }
+
+
   
   .btn {
     background-color: #4CAF50;
@@ -59,10 +74,11 @@
 
 <div class="row ">
   <div class="col-md-6">
-    <div class="card">
+    <div class="my-card">
       <div class="card-header"><h2> Search Properties for Rent around you</h2></div>
         <div class="card-body">
-          <form method="get"  novalidate="novalidate"  action="{{url('/properties/radius/cityLng/cityLat')}}">
+          
+          <form  name="myForm" method="get"  novalidate="novalidate" onsubmit="return validateForm()" action="{{url('/properties/radius/cityLng/cityLat')}}">
             {{-- <div class="card bg-light mb-3" style="max-width: 100rem; height: 30rem;" > --}}
               @csrf
               <div class="form-row align-items-center">
@@ -314,9 +330,10 @@
 </div>
 <br>
 <div class="col-md-6">
+  <div class="my-card1">
   
-    <h2> Properties for Rent in the UK</h2>
-    <hr>
+    <div class="card-header"><h2> Properties for Rent in the UK</h2></div>
+    {{-- <hr> --}}
       
   @php
         $cities = array('Aberdeen','Armagh','Bangor','Bath','Belfast','	Birmingham','Bradford','Brighton and Hove',
@@ -339,7 +356,7 @@
         <ul>
         @foreach ($cities as $c)
             @if (in_array($c, $cities2))
-                <li><a href="/properties/properties-around-you/{{$c}}">properties for rent in {{$c}}</a></li>
+                <li><a href="/properties/properties-around-you/{{$c}}"> properties for rent in {{$c}}</a></li>
             @endif
             
         @endforeach
@@ -353,7 +370,19 @@
 
  
       </div>
+    </div>  
+ 
 
       
      
 @endsection
+
+<script>
+  function validateForm() {
+  var x = document.forms["myForm"]["searchTextField"].value;
+  if (x == "") {
+    alert("Please Enter a Location");
+    return false;
+  }
+}
+  </script>

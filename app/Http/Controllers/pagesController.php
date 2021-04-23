@@ -19,6 +19,11 @@ class pagesController extends Controller
         return view('pages.forRent')->with('title', $title);
     }
 
+    public function about(){
+         $title = 'About';
+        return view('pages.about')->with('title', $title);
+    }
+
     public function forSale(){
         $title = 'Sales';
         return view('pages.forSale')->with('title', $title);

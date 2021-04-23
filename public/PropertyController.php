@@ -45,8 +45,8 @@ class PropertyController extends Controller
     }
 
     public function gettingProperties(Request $request){
-        // $this->validate($request,[
-        //     'searchTextField' => 'required']);
+        $this->validate($request,[
+            'searchTextField' => 'required']);
         $userIp = $request->ip();
         $locationData = \Location::get($userIp);
         $latit  = $locationData['latitude'];

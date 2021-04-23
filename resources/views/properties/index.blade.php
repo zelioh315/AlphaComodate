@@ -8,7 +8,7 @@
         <form method="get" action="{{url('/properties/radius/cityLng/cityLat')}}">
             @csrf
             <div class="form-row align-items-center">
-              <div class="col-md-3 offset-md-2">
+              <div class="col-md-3 offset-md-1">
                 {{-- <label class="sr-only" for="inlineFormInput">place</label> --}}
                 <label for="location">Location</label>
                  <div class="input-group mb-2">

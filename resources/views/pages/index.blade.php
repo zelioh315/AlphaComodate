@@ -34,11 +34,17 @@
     /* Add styles to the form container */
     .homepage {
       position: absolute;
-      left: 25%;
+      left: 5%;
       margin: 20px;
       max-width: 650px;
       max-height: 1000px;
       padding: 16px;
+      /* position: absolute;
+      left: 25%;
+      margin: 20px;
+      max-width: 650px;
+      max-height: 1000px;
+      padding: 16px; */
       /* background-color: #f7f7ab; */
       background: rgba(230, 225, 241, 0.35);
      
@@ -81,8 +87,8 @@
     <div class="bg-img">
         <br><br><br>
         
-        <form method="get"  novalidate="novalidate" class="homepage" action="{{url('/properties/radius/cityLng/cityLat')}}">
-            <h1> Search Properties for Rent around you</h1>
+        <form name="myForm" method="get"  novalidate="novalidate" onsubmit="return validateForm()" class="homepage" action="{{url('/properties/radius/cityLng/cityLat')}}">
+            <h3> Search Properties for Rent around you</h3>
             @csrf
             <div class="form-row align-items-center">
               <div class="col-md-8 offset-md-0">
@@ -107,7 +113,7 @@
                 <input type="hidden" id="cityLng" name="cityLng" />
               </div>
               </div>
-              <div class="col-md-3 offset-md-0">
+              <div class="col-md-4 offset-md-0">
                 <b><label for="Radius">Search radius</label></b>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
@@ -131,7 +137,7 @@
             </div>
 
               <div class="form-row align-items-center">
-              <div class="col-md-4 offset-md-0">
+              <div class="col-md-5 offset-md-0">
                 <b><label for="min_price">Minimum Price</label></b>
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
@@ -207,7 +213,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 offset-md-0">
+              <div class="col-md-5 offset-md-0">
                 <b><label for="max_price">Maximum Price</label></b>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -285,7 +291,7 @@
               </div>
               <div class="form-row align-items-center">
 
-                <div class="col-md-4 offset-md-0">
+                <div class="col-md-5 offset-md-0">
                   <b><label for="num_beds">Bedrooms</label></b>
                   {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                   <div class="input-group mb-2">
@@ -306,7 +312,7 @@
                 
               
               
-              <div class="col-md-4 offset-md-0">
+              <div class="col-md-5 offset-md-0">
                 <b><label for="property_type">Property Type</label></b>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -323,7 +329,7 @@
                 </div>
             </div>
             <div class="col-md-3 offset-md-5"  >
-              <button type="submit" class="btn btn-info btn-lg" >Search</button>
+              <button  type="submit" class="btn btn-info btn-lg" >Search</button>
             </div>
               
             </div>
@@ -334,4 +340,14 @@
 
 
 @endsection
+
+<script>
+  function validateForm() {
+  var x = document.forms["myForm"]["searchTextField"].value;
+  if (x == "") {
+    alert("Please Enter a Location");
+    return false;
+  }
+}
+  </script>
         
