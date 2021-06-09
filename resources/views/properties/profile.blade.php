@@ -69,16 +69,41 @@
                         @if(count($properties) > 0)
                             @foreach ($properties as $post)
                             <div class="col-sm-4">
-                            <a href = "/properties/{{$post->id}}">
+                            
                             <div class="card mb-3" >
+                                @php
+                                    $id_count = 0;
+
+                                @endphp
                                 @foreach($post->photos as $file )
                                     @if($file->properties_id== $post->id)
-                                    <img class="card-img-top" src="/storage/cover_images/{{$file->filename}}" alt="Property image ">
-                                        @break
+                                        @php
+                                            $id_count+=1
+                                        @endphp
+                                        <a href = "/properties/{{$post->id}}">
+                                        <img class="card-img-top" src="/storage/cover_images/{{$file->filename}}" alt="Property image ">
+                                            @break
+                                    @else
+                                        @php
+                                            $id_count =0;
+                                        @endphp
                                     @endif
                                 @endforeach
+                                @if($id_count==0)
+                                    @if(!Auth::guest())
+                                        @if(Auth::user()->id == $post->user_id)
+                                            <a href = "/photos/{{$post->id}}/edit"> 
+                                            <img class="card-img-top" src="/storage/wallpaper/template.jpg" alt="Property image ">
+                                            </a>
+                                        @endif
+                                    @else
+                                    <img class="card-img-top" src="/storage/wallpaper/template1.jpg" alt="Property image "> 
+                                    @endif    
+                                            
+                                {{-- <a href = "/photos/{{$post->id}}/edit" class="btn btn-primary">Add photos</a> --}}
+                                 @endif
                             <div class="card-body">
-                                <h5><b>{{ucwords($post->header)}}</b></h5>
+                                <a href = "/properties/{{$post->id}}"><h5><b>{{ucwords($post->header)}}</b></h5></a>
                             </a>
                                 <p class="card-text">
                                     {{-- <b>Property Id: {{$post->id}}</b> --}}
@@ -97,8 +122,10 @@
                                 <h6>Listed {{$days}} days ago</h6>
                                 @if(!Auth::guest())
                                 @if(Auth::user()->id == $post->user_id)
-                                      <a href = "/properties/{{$post->id}}/edit" class="btn btn-default">Edit</a>
-                    
+                                      <a href = "/properties/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
+                                      {{-- <a href = "#" class="btn btn-primary">Rented</a> --}}
+                                    
+                                      {{-- <h1>{{$id_count}}</h1> --}}
                                       {!! Form::open(['action' => ['PropertyController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right']) !!}
                                         {{Form::hidden('_method','DELETE')}}
                                         {{Form::submit('Delete', ['class' => "btn btn-danger"])}}

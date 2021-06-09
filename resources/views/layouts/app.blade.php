@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'AlphaComodate') }}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/storage/wallpaper/alicon11.png"  />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,153 +28,81 @@
      <link href="css/bootstrap.min.css" rel="stylesheet">
 
      <!-- Icons -->
+     {{-- <script src='http://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> --}}
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+    <style>
+        .owl-carousel .item {
+          height: 15rem;
+          /* background: #595a5a; */
+          padding: 1rem;
+        }
+        .owl-carousel .item h4 {
+          color: #FFF;
+          font-weight: 400;
+          margin-top: 0rem;
+         }
+        </style>
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"/>
+        <script>
+        jQuery(document).ready(function($){
+          $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            autoplay:true,
+            autoplayTimeout:3000,
+            responsive:{
+              0:{
+                items:1
+              },
+              600:{
+                items:3
+              },
+              1000:{
+                items:5
+              }
+            }
+          })
+        })
+        </script>
+     
      <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
-     <style>
-         /* <a style="text-decoration: none;"></a> */
-         /* width */
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #a7a7a7;
-        }
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #929292;
-        }
-        ul {
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            list-style: none;
-        }
-        .user-wrapper, .message-wrapper {
-            border: 1px solid #dddddd;
-            overflow-y: auto;
-        }
-        .user-wrapper {
-            height: 600px;
-        }
-        .user {
-            cursor: pointer;
-            padding: 5px 0;
-            position: relative;
-        }
-        .user:hover {
-            background: #eeeeee;
-        }
-        .user:last-child {
-            margin-bottom: 0;
-        }
-        .pending {
-            position: absolute;
-            left: 13px;
-            top: 9px;
-            background: #b600ff;
-            margin: 0;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            padding-left: 5px;
-            color: #ffffff;
-            font-size: 12px;
-        }
-        .media-left {
-            margin: 0 10px;
-        }
-        .media-left img {
-            width: 64px;
-            border-radius: 64px;
-        }
-        .media-body p {
-            margin: 6px 0;
-        }
-        .message-wrapper {
-            padding: 10px;
-            height: 536px;
-            background: #eeeeee;
-        }
-        .messages .message {
-            margin-bottom: 15px;
-        }
-        .messages .message:last-child {
-            margin-bottom: 0;
-        }
-        .received, .sent {
-            width: 45%;
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
-        .received {
-            background: #575555;
-            color:white;
-        }
-        .sent {
-            background: #180e29;
-            float: right;
-            text-align: right;
-            color:white;
-        }
-        .message p {
-            margin: 5px 0;
-        }
-        .date {
-            color: #777777;
-            font-size: 12px;
-        }
-        /* .active {
-            background: #eeeeee;
-        } */
-        /* input[type=text] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 15px 0 0 0;
-            display: inline-block;
-            border-radius: 4px;
-            box-sizing: border-box;
-            outline: none;
-            border: 1px solid #cccccc;
-        }
-        input[type=text]:focus {
-            border: 1px solid #aaaaaa;
-        } */
-     </style>
-     <script>
-         $('#myModal').modal('show');
-// www.jquery2dotnet.com
-         </script>
-
     
 </head>
 <body>
+    <a name="top"></a>
     <div id="app">
-       
         <main class="py-4">
             @include('inc.navbar')
             <div class="container">
                 @include('inc.messages')
             @yield('content')
-            @include('inc.footbar')
+        </div>
+            @include('inc.foot')
         </main>
     </div>
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    
+    {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script >
         CKEDITOR.replace('summary-ckeditor');
-</script>
+</script> --}}
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvxoZdoTf5GcBFXLOWKVI_jElP7mlU-28&libraries=places"></script>
 <script>
     function initialize() {
+        var options = {
+        // types: ['(cities)']['address','geocode'],
+        componentRestrictions: {country: "uk"}
+        };
       var input = document.getElementById('searchTextField');
-      var autocomplete = new google.maps.places.Autocomplete(input);
+      var autocomplete = new google.maps.places.Autocomplete(input,options);
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
             document.getElementById('city2').value = place.name;
@@ -188,100 +117,71 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-    var receiver_id = '';
-    var my_id = "{{ Auth::id() }}";
-    $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+{{-- <script>
+    var lat ;//= document.getElementById("lat");
+    var long ;//= document.getElementById("long");
+    // function getLocation() {
+      if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        alert("Geolocation is not supported by this browser.") ;
+      }
+    
+    
+    function showPosition(position) {
+        lat = position.coords.latitude ;
+        long = position.coords.longitude;
 
-      
-
-            // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
-
-            var pusher = new Pusher('7c785cb5029cb77df072', {
-            cluster: 'eu',
-            
-            });
-
-            var channel = pusher.subscribe('my-channel');
-            channel.bind('my-event', function(data) {
-            //alert(JSON.stringify(data));
-            if (my_id == data.user_id){
-                alert('sender')
-            }else if(my_id == data.reciever_id){
-                if (receiver_id == data.user_id) {
-                    // if receiver is selected, reload the selected user ...
-                    $('#' + data.user_id).click();
-                } else {
-                    // if receiver is not seleted, add notification for that user
-                    var pending = parseInt($('#' + data.user_id).find('.pending').html());
-                    if (pending) {
-                        $('#' + data.user_id).find('.pending').html(pending + 1);
-                    } else {
-                        $('#' + data.user_id).append('<span class="pending">1</span>');
-                    }
-                }
-            }
-
-            
-            });
-
-        $('.user').click(function(){
-            $('.user').removeClass('active');
-            $(this).addClass('active');
-
-            receiver_id = $(this).attr('id');
-            // alert(receiver_id);
-            $.ajax({
-                type: "get",
-                url: "message/" + receiver_id,//create route
-                data:"",
-                cache: false,
-                success: function (data){
-                    $('#message').html(data);
-                    // alert(data);
-                }
-            });
-        });
-
-        $(document).on('keyup', '.input-text input', function (e){
-            var message = $(this).val();
-            if(e.keyCode == 13 && message != '' && receiver_id !=''){
-                $(this).val('');
-                // alert(message);
-                var datastr = "receiver_id=" + receiver_id + "&message="+message;
-                $.ajax({
-                    type: "post",
-                    url: "message",
-                    data: datastr,
-                    cache: false,
-                    success: function (data) {
-                    },
-                    error: function (jqXHR, status, err) {
-                    },
-                    complete: function () {
-                        scrollToBottomFunc();
-                    }
-                })
-              //  alert(datastr);
-            }
-        })
-   
-   
-    });
-
-    function scrollToBottomFunc() {
-        $('.message-wrapper').animate({
-            scrollTop: $('.message-wrapper').get(0).scrollHeight
-        }, 50);
+        // document.getElementById('user_lat').value = lat;
+        // document.getElementById('user_lng').value = long;
     }
-        // ajax setup form csrf token
 
-</script>
+    var latlng;
+        latlng = new google.maps.LatLng(lat, long);
+
+        new google.maps.Geocoder().geocode({'latLng' : latlng}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    var country = null, countryCode = null, city = null, cityAlt = null;
+                    var c, lc, component;
+                    for (var r = 0, rl = results.length; r < rl; r += 1) {
+                        var result = results[r];
+
+                        if (!city && result.types[0] === 'locality') {
+                            for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+                                component = result.address_components[c];
+
+                                if (component.types[0] === 'locality') {
+                                    city = component.long_name;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (!city && !cityAlt && result.types[0] === 'administrative_area_level_1') {
+                            for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+                                component = result.address_components[c];
+
+                                if (component.types[0] === 'administrative_area_level_1') {
+                                    cityAlt = component.long_name;
+                                    break;
+                                }
+                            }
+                        } else if (!country && result.types[0] === 'country') {
+                            country = result.address_components[0].long_name;
+                            countryCode = result.address_components[0].short_name;
+                        }
+
+                        if (city && country) {
+                            break;
+                        }
+                    }
+
+                    console.log("City: " + city + ", City2: " + cityAlt + ", Country: " + country + ", Country Code: " + countryCode);
+                }
+            }
+        });
+    </script>
+ --}}
+
 </body>
 </html>

@@ -3,6 +3,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="/storage/wallpaper/alicon11.png"  />
 
 <style>
     /* body, html {
@@ -82,12 +83,12 @@
     </style>
  
  
-    
+ <a name="top"></a>
     {{-- <h2>Form on Hero Image</h2> --}}
     <div class="bg-img">
         <br><br><br>
         
-        <form name="myForm" method="get"  novalidate="novalidate" onsubmit="return validateForm()" class="homepage" action="{{url('/properties/radius/cityLng/cityLat')}}">
+        <form name="myForm" method="get"  novalidate="novalidate" onsubmit="return validateForm()" class="homepage" action="{{url('/properties/{radius}/{lng}/{lat}')}}">
             <h3> Search Properties for Rent around you</h3>
             @csrf
             <div class="form-row align-items-center">
@@ -96,7 +97,7 @@
                 <b><label for="location">Location</label></b>
                  <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                      <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf124;</i></div>
+                      <div class="input-group-text"><i style='font-size:20px' class="material-icons">&#xe55c;</i></div>
                     </div>
                     @php
                         $placeholder = ' eg. luton, peckham or se25';
@@ -118,7 +119,7 @@
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf4d7;</i></div>
+                    <div class="input-group-text"><i style='font-size:20px' class="material-icons">&#xe569;</i></div>
                   </div>
                   {{-- <input type="text" class="form-control" name="radius" size="3" id="inlineFormInputGroup" placeholder="radius"> --}}
                   <select class="form-control" name="radius">
@@ -142,7 +143,7 @@
                 {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf154;</i></div>
+                    <div class="input-group-text"><i style='font-size:20px' class="fa fa-gbp"></i></div>
                   </div>
                   {{-- <input type="text" class="form-control" name="min_price" size="5" id="inlineFormInputGroup" placeholder="min price"> --}}
                   <select class="form-control" name="min_price">
@@ -157,11 +158,7 @@
                     <option value="800"  data-condensed="800">&pound;800 pcm</option>
                     <option value="900"  data-condensed="900">&pound;900 pcm</option>
                     <option value="1000"  data-condensed="1k">&pound;1,000 pcm</option>
-                
-                
                     <option value="1250"  data-condensed="1.25k">&pound;1,250 pcm</option>
-                
-                
                     <option value="1500"  data-condensed="1.5k">&pound;1,500 pcm</option>
                 
                 
@@ -184,8 +181,6 @@
                 
                 
                     <option value="3250"  data-condensed="3.25k">&pound;3,250 pcm</option>
-                
-                
                     <option value="3500"  data-condensed="3.5k">&pound;3,500 pcm</option>
                     <option value="3750"  data-condensed="3.75k">&pound;3,750 pcm</option>
                     <option value="4000"  data-condensed="4k">&pound;4,000 pcm</option>
@@ -217,7 +212,7 @@
                 <b><label for="max_price">Maximum Price</label></b>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf154;</i></div>
+                  <div class="input-group-text"><i style='font-size:20px' class="fa fa-gbp"></i></div>
                 </div>
                 {{-- <input type="text" class="form-control" name="max_price" size="5" id="inlineFormInputGroup" placeholder="max price"> --}}
                 <select class="form-control" name="max_price">
@@ -231,36 +226,16 @@
                     <option value="700"  data-condensed="700">&pound;700 pcm</option>
                     <option value="800"  data-condensed="800">&pound;800 pcm</option>
                     <option value="900"  data-condensed="900">&pound;900 pcm</option>
-                    <option value="1000"  data-condensed="1k">&pound;1,000 pcm</option>
-                
-                
-                    <option value="1250"  data-condensed="1.25k">&pound;1,250 pcm</option>
-                
-                
+                    <option value="1000" data-condensed="1k">&pound;1,000 pcm</option>
+                    <option value="1250" data-condensed="1.25k">&pound;1,250 pcm</option>
                     <option value="1500"  data-condensed="1.5k">&pound;1,500 pcm</option>
-                
-                
                     <option value="1750"  data-condensed="1.75k">&pound;1,750 pcm</option>
-                
-                
                     <option value="2000"  data-condensed="2k">&pound;2,000 pcm</option>
-                
-                
                     <option value="2250"  data-condensed="2.25k">&pound;2,250 pcm</option>
-                
-                
                     <option value="2500"  data-condensed="2.5k">&pound;2,500 pcm</option>
-                
-                
                     <option value="2750"  data-condensed="2.75k">&pound;2,750 pcm</option>
-                
-                
                     <option value="3000"  data-condensed="3k">&pound;3,000 pcm</option>
-                
-                
                     <option value="3250"  data-condensed="3.25k">&pound;3,250 pcm</option>
-                
-                
                     <option value="3500"  data-condensed="3.5k">&pound;3,500 pcm</option>
                     <option value="3750"  data-condensed="3.75k">&pound;3,750 pcm</option>
                     <option value="4000"  data-condensed="4k">&pound;4,000 pcm</option>
@@ -283,8 +258,6 @@
                     <option value="17500"  data-condensed="17.5k">&pound;17,500 pcm</option>
                     <option value="20000"  data-condensed="20k">&pound;20,000 pcm</option>
                     <option value="25000"  data-condensed="25k">&pound;25,000 pcm</option>
-                
-                
                   </select>
               </div>
             </div>
@@ -296,7 +269,7 @@
                   {{-- <label class="sr-only" for="inlineFormInputGroup">Username</label> --}}
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                      <div class="input-group-text"><i style="font-size:20px" class="fas">&#xf236;</i></div>
+                      <div class="input-group-text"><i style="font-size:20px" class="material-icons">&#xe549;</i></div>
                     </div>
                     {{-- <input type="text" class="form-control" name="beds" id="inlineFormInputGroup" size="3" placeholder="Beds"> --}}
                     <select class="form-control" name="bedrooms" >
@@ -309,14 +282,12 @@
                     </select>
                   </div>
                 </div>
-                
-              
-              
+
               <div class="col-md-5 offset-md-0">
                 <b><label for="property_type">Property Type</label></b>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i style='font-size:20px' class='fas'>&#xf015;</i></div>
+                  <div class="input-group-text"><i style='font-size:20px' class="fa fa-home"></i></div>
                 </div>
                 {{-- <input type="text" class="form-control" name="property_type" size="5" id="inlineFormInputGroup" placeholder="property type"> --}}
                 <select class="form-control" name="property_type">
@@ -335,19 +306,74 @@
             </div>
           </form>    
     </div>
-    
+
+    <form name="locationform" method="get" action="{{url('/')}}">
+      @csrf
+      <input type="hidden" id="user_lat" name="user_lat" value="">
+      <input type="hidden" id="user_lng" name="user_lng" value="">
+    </form>
+    {{-- <p id="lat"></p>
+    <p id="long"></p> --}}
 @section('content')
-
-
+@if(count($properties)> 0)
+<h1>Properties around you</h1>
+@endif
+<div class="owl-carousel owl-theme mt-5">
+    @if(count($properties)> 0)
+        @foreach ($properties as $p)
+          @php
+                $heading = $p->header;
+                $head = substr($heading,0,15)
+            @endphp
+            @if(count($photos)> 0)
+              @foreach ( $photos as $file )
+                  @if($file->properties_id== $p->id)
+                  <div class="item"><a href = "/properties/{{$p->id}}">
+                    <div class="card">
+                      <div class="ribbon ribbon-top-left">
+                        <span>£{{$p->price}} pcm</span>
+                        <img src="storage/cover_images/{{$file->filename}}" alt={{$p->header}}>
+                      
+                        <div style="text-align: left" class="card-footer">
+                          <P > {{$p->City}}</P>
+                          {{-- <p>{{$distance}}</p> --}}
+                        {{-- <p class="card-text">{{ ucfirst($head)}}...</p> --}}
+                        {{-- <br>
+                        <small class="text-muted">{{$sql_distance}}</small></p> --}}
+                      </div>
+                    </div>
+                    </div>
+                  </a>
+                </div>
+                  {{-- <a href = "/properties/{{$p->id}}"><img style="width:100%"src="/storage/cover_images/{{$file->filename}}"></a> --}}
+                      @break
+                  @endif
+              @endforeach
+          @endif 
+        @endforeach
+    @endif
+</div>
 @endsection
 
 <script>
   function validateForm() {
+    function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+}
   var x = document.forms["myForm"]["searchTextField"].value;
-  if (x == "") {
+
+  if (isEmptyOrSpaces(x)) {
     alert("Please Enter a Location");
     return false;
   }
 }
   </script>
-        
+  
+{{-- <script>
+  var autosubmit = false;
+  if(autosubmit == true)
+        window.onload = function(){
+      document.forms['locationform'].submit();
+      var autosubmit = false;
+    }
+</script> --}}

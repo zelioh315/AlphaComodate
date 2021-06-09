@@ -78,7 +78,7 @@ class PhotoController extends Controller
                 }
        
             }
-            return redirect('/properties')->with('success','Property listed successfully.....');
+            return redirect('/profile')->with('success','Property listed successfully.....');
     }
 
     /**
@@ -98,9 +98,18 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function edit($id)
+    // {
+    //     //
+    // }
     public function edit($id)
     {
-        //
+        $properties =  properties::find($id);
+        if(auth()->user()->id !==$properties->user_id){
+            return redirect('/')->with('error', 'Unauthorised Page');
+
+        }
+        return view('properties.pictureUpload')-> with('properties',$properties);
     }
 
     /**

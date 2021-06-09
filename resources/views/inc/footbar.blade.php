@@ -1,68 +1,52 @@
-<footer class="bg-light text-center text-lg-start">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{{-- <footer class="bg-light text-center text-lg-start"> --}}
     <!-- Grid container -->
-    <div class="container p-4">
-      <!--Grid row-->
-      {{-- <div class="row">
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Footer Content</h5>
-  
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-            voluptatem veniam, est atque cumque eum delectus sint!
-          </p>
-        </div>
-        <!--Grid column-->
-  
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Links</h5>
-  
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#!" class="text-dark">Link 1</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 2</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 3</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 4</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-  
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase mb-0">Links</h5>
-  
-          <ul class="list-unstyled">
-            <li>
-              <a href="#!" class="text-dark">Link 1</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 2</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 3</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Link 4</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
+    <footer id="footercontainer">
+    {{-- <div class="w3-container w3-green">
+      <h1>W3Schools Demo</h1> 
+      <p>Resize this responsive page!</p> 
     </div> --}}
-    <!-- Grid container -->
-  
-    <!-- Copyright -->
-    <br>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2021 AlphaComodate.
-      {{-- <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a> --}}
+          <div id="part1">
+          
+                <div class="w3-row-padding">
+                    <div class="w3-third">
+                      <a id="sitelink" href="/">AlphaComodate</a>
+                      <p id="title">"Finding a home shouldn't be a mission".</p>
+                      <p id="detail">“...Everything around you that you call life was made up by people that were no smarter than you. And you can change it, you can influence it… Once you learn that, you'll never be the same again.”
+                      <br> ~steve Jobs~</p>
+                    </div>
+                
+                  <div class="w3-third">
+                    <p id="txt1">Explore</p> 
+                    {{-- <div id="explore"> --}}
+                      {{-- <p id="txt1">Explore</p>  --}}
+                      <a class="mylink" href="/">Home</a> 
+                      <a class="mylink" href="/about_us">About</a> 
+                      <a class="mylink" href="/contact_us">Contact Us</a> 
+                      <a class="mylink" href="/properties">Search</a>
+                      <a class="mylink" href="#top">Back to top</a>
+                  {{-- </div> --}}
+                  </div>
+                
+                  <div class="w3-third">
+                    {{-- <div id="visit"> --}}
+                      <p id="txt1">Address</p> 
+                      {{-- <p id="txt2">Address</p> --}}
+                      <p class="footer-text">Heantun Point </p>
+                      <p class="footer-text">Flat A7.2 </p>
+                      <p class="footer-text">1 Culwell Street </p>
+                      <p class="footer-text">Wolverhampton</p>
+                  {{-- </div> --}}
+                </div>
+              </div>
+            </div>
+          <!-- Grid container -->
+        
+          <!-- Copyright -->
+        <div id="part2">
+            <p id="txt6">© 2021 AlphaComodate - All rights reserved</p>
+        </div> 
+    </footer>
+{{--     
+</footer> --}}

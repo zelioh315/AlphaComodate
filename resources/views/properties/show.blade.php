@@ -84,6 +84,8 @@
                     </a>                                   
               </div>
           </div>
+          </div>
+          <div class="card-body">
             <h3>{{ucwords($properties->header)  }} (£{{$properties->price}} pcm)</h3>
           
             {{-- <blockquote class="blockquote mb-0"> --}}
@@ -236,5 +238,6 @@
         </div>
         </div>   
     </div>
+</div>
 </div>
 @endsection

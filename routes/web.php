@@ -29,7 +29,8 @@ Route::get('/properties/{id}/Sendemail', 'PagesController@sendAnEmail');
 // Route::get('/properties/{id}/pictureUpload', 'PagesController@pictureUpload');
 Route::get('/students', 'PagesController@students');
 Route::get('/forSale', 'PagesController@forSale');
-Route::get('/about', 'PagesController@about');
+Route::get('/about_us', 'PagesController@about');
+Route::get('/contact_us', 'PagesController@contact');
 Route::get('/servicedAccomodations', 'PagesController@servicedAccomodations');
 // Route::get('/googlemap', 'MapController@map');
 Route::get('/properties-on-location', 'PropertyController@propertiesOnLocation');
@@ -40,17 +41,18 @@ Route::get('/properties/properties-around-you/{city}', 'PropertyController@prope
 Route::get('/properties/propertyonmap/{id}', 'PropertyController@propertyonmap');
 Route::resource('propertiesForRent', 'PropertyForRentController');
 Route::resource('email', 'emailController');
-Route::resource('sendsms', 'smsController');
+// Route::resource('sendsms', 'smsController');
 Route::resource('photos', 'PhotoController');
-
+// Route::resource('email', 'emailController');  
+ Route::post('/contact_us', 'emailController@contact_us');        
 //Route::resource('/', 'PropertyController');
 
 
 
 Auth::routes();
-Route::get('/chat', 'chatController@index');
-Route::get('/message/{id}', 'chatController@getMessage')->name('message');
-Route::post('message', 'chatController@sendMessage');
+// Route::get('/chat', 'chatController@index');
+// Route::get('/message/{id}', 'chatController@getMessage')->name('message');
+// Route::post('message', 'chatController@sendMessage');
 Route::get('/home', 'HomeController@index')->name('home');
 // Route::resource('/home', 'HomeController@index')->name('home');
 Route::resource('profile', 'profileController');

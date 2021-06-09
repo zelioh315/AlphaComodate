@@ -76,6 +76,368 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+/* Removing powered by google stamp*/
+.pac-container:after {
+  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+  background-image: none !important;
+  height: 0px;
+  
+  
+}
+
+
+/* common */
+.ribbon {
+  position: absolute;
+  left: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  /* width: 75px; height: 75px; */
+  text-align: right;
+}
+.ribbon span {
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFF;
+  /* text-transform: uppercase; */
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  width: 100px;
+  display: block;
+  background: #3498db;
+  background: linear-gradient(#3498db 0%, #3498db 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; left: -21px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  /* border-left: 3px solid #3498db;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #3498db; */
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  /* border-right: 3px solid #50db34;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #39db34; */
+}
+
+.myfooter{
+  width: 100%;
+  height: 150px;
+  background-color: rgba(231, 230, 230, 0.2);
+
+  /* background-color: #ffffff; */
+}
+/* .profile-photo-container{
+  position: relative;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+.photo-text-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+#footercontainer {
+  width: 100%;
+  max-height: 600px; 
+  position: absolute;
+  overflow:hidden;
+
+  /* background-color:black */
+  /* bottom: 0px; */
+  /* right: 0;
+  
+  left: 0; */
+}
+
+
+#part1 {
+  width: 100%;
+  max-height:380px;
+  background-color: #292929
+  
+}
+#part2 {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  background-color: black;
+  position: relative;
+  top: -15px
+}
+#companyinfo {
+  width: 14%;
+  height: 280px;
+  position: relative;
+  left: 8%;
+  top: 30px
+}
+
+#sitelink {
+  font-size: 35px;
+  color: #ffffff
+}
+
+#sitelink:hover {
+  color: #da2828
+}
+
+#title {
+  color: gray;
+  position: relative;
+  top: 0px;
+  font-size: 14.1px
+}
+
+#detail {
+  color: #aaa7a7;
+  font-size: 14px
+}
+
+#explore {
+  width: 14%;
+  height: 280px;
+  position: relative;
+  top: -235px;
+  left: 40%
+}
+
+#txt1,
+#txt2,
+#txt3,
+#txt4,
+#txt5 {
+    color: white;
+    font-size: 20px
+}
+
+.mylink {
+  display: flex;
+  width: 90px;
+  height: 40px;
+  color: #aaa7a7;
+  background-color: transparent;
+  border-top: 2px solid white;
+  position: relative;
+  top: -10px
+}
+.mylink:hover,
+.mylink1:hover {
+    color: #e65100
+}
+
+#visit {
+  width: 14%;
+  height: 280px;
+  position: relative;
+  top: -515px;
+  left: 60%
+}
+
+.footer-text {
+  color: #aaa7a7;
+  font-size: 14px;
+  margin-top: -10px
+}
+
+#legal {
+  width: 14%;
+  height: 280px;
+  position: relative;
+  top: -800px;
+  left: 75%
+}
+
+.mylink1 {
+  display: flex;
+  width: 150px;
+  height: 40px;
+  color: #aaa7a7;
+  background-color: transparent;
+  border-top: 2px solid white;
+  position: relative;
+  top: -10px;
+  margin-top: 7px
+}
+#txt6 {
+  color: white;
+  position: relative;
+  top: 13px;
+  left: 8%;
+  width: 80%;
+  color: #aaa7a7
+}
+
+/* @media only screen and (max-width:1000px) {
+  #companyinfo {
+      width: 20%
+  }
+
+  #sitelink {
+      font-size: 30px
+  }
+
+  #txt5,
+  #txt4 {
+      font-size: 17px
+  }
+
+  #txt5 {
+      position: relative;
+      top: -5px
+  }
+} */
+
+ @media screen and (max-width: 1000px) {
+  #companyinfo, #explore, #visit,#legal {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+   
+    }
+    #part1 {
+      width: 100%;
+      max-height: 1000px;
+      /* background-color: #d40404; */
+      }
+
+      #companyinfo {
+        width: 60%;
+        height: 300px;
+        /* position: relative;
+        left: 8%;
+        top: 30px */
+      }
+
+      #explore {
+        /* width: 30%;
+        height: 400px; */
+        position: relative;
+        left: 8%;
+        top: 0px
+      }
+
+      #visit {
+        height: 200px;
+        position: relative;
+        left: 8%;
+        top: 0px
+      }
+
+      #legal {
+        /* width: 30%;
+        height: 400px; */
+        position: relative;
+        left: 8%;
+        top: 0px
+      }
+
+      .homepage {
+        /* position: absolute;
+        left: 5%;
+        margin: 20px;
+        max-width: 300px;
+        max-height: 700px;
+        padding: 16px; */
+        bottom: 5%;
+        /* position: absolute;
+        left: 25%;
+        margin: 20px;
+        max-width: 650px;
+        max-height: 1000px;
+        padding: 16px; */
+        /* background-color: #f7f7ab; */
+        background: rgba(230, 225, 241, 0.35);
+      
+  } 
+}
+
+/* @media only screen and (max-width:850px) {
+  #companyinfo {
+      position: relative;
+      left: 3%
+  }
+
+  #txt6 {
+      position: relative;
+      left: 3%
+  }
+
+  #txt1,
+  #txt2,
+  #txt3,
+  #txt4,
+  #txt5 {
+      font-size: 15px
+  }
+
+  #explore {
+      position: relative;
+      top: -240px;
+      left: 26%
+  }
+
+  #sitelink {
+      font-size: 25px
+  }
+
+  #detail {
+      font-size: 13px
+  }
+
+  .link {
+      width: 60px
+  }
+
+  #visit {
+      position: relative;
+      top: -520px;
+      left: 37%
+  }
+
+  .footer-text {
+      font-size: 13px
+  }
+
+  #legal {
+      position: relative;
+      top: -800px;
+      left: 54%
+  }
+
+
+
+  #txt5 {
+      position: relative;
+      left: -110%;
+      top: px
+  }
+
+
+  #part1 {
+      height: 250px
+  }
+} */
+
+
+
+.nav-footer{
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 50px;
+
+}
 
 article,
 aside,
@@ -88,6 +450,7 @@ main,
 nav,
 section {
   display: block;
+  
 }
 
 body {
@@ -6461,7 +6824,7 @@ a.close.disabled {
 .modal-body {
   position: relative;
   flex: 1 1 auto;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .modal-footer {

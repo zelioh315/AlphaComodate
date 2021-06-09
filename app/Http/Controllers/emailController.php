@@ -65,8 +65,42 @@ class emailController extends Controller
             
             Mail::to($user_email)->send(new EmailFromAPotentialTenant($mailData));
      
-            return redirect('/properties')->with('success','Email send successfully.....');
+            return redirect('/')->with('success','Email send successfully.....');
     }
+
+    public function contact_us(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            'number' => 'required',
+            'email' => 'required',
+            'message' => 'required'
+        ]);
+
+
+
+            // $Email = new Email;
+            // $Email->name = $request->input('name');
+            // $Email->email = $request->input('email');
+            // $Email->number = $request->input('number');
+            // $Email->message = $request->input('message');
+            // $Email->property_id = $request->input('property_id');
+
+            $mailData = array('name'=>$request->input('name'),
+                              'email'=>$request->input('email'),
+                              'number'=>$request->input('number'),
+                              'message'=>$request->input('message')  );
+
+            // $user=User::find($Email->property_id);
+            $user_email = env("MAIL_USERNAME", "alphacomodate@gmail.com");;
+            // $Email->landlord_email =  $user_email;
+            // $Email->save();
+            
+            Mail::to($user_email)->send(new EmailFromAPotentialTenant($mailData));
+     
+            return redirect('/contact_us')->with('success','Email send successfully.....');
+    }
+
 
     /**
      * Display the specified resource.

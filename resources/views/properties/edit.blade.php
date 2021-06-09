@@ -48,7 +48,7 @@
         </div>
 
 
-        {{ Form::label('title', 'would you like to update the pictures?') }}
+       <b> {{ Form::label('title', 'would you like to update the pictures?') }}</b>
         {{Form::select('editphoto',[
              'yes' => 'Yes',
              'no' => 'No', 

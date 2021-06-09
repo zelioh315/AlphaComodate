@@ -24,33 +24,27 @@ class PropertyController extends Controller
     {
         $this->middleware('auth',['except'=>['index', 'show','gettingProperties','propertyonmap','propertiesOnLocation','propertyCities' ]]);
     }
-    public function propertiesOnLocation(Request $request){
-        // $userIp = '5.151.5.251';
-        // $locationData = \Location::get($userIp);
-        // dd($locationData);
-        // $location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-        // print_r($location);
-        $userIp = $request->ip();
-        $res = file_get_contents('https://www.iplocate.io/api/lookup/$userIp');
-        $res = json_decode($res);
+    public function properties_around_you(Request $request){
+        $radius = 15;
+        $lat = $request->user_lng;
+        $lng =$request->user_lat;
+        $sql_distance = " ,(((acos(sin((".$lat."*pi()/180)) * sin((`properties`.`latitude`*pi()/180))+cos((".$lat."*pi()/180)) * 
+                            cos((`properties`.`latitude`*pi()/180)) * 
+                            cos(((".$lng."-`properties`.`longitude`)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance "; 
+        $order_by = ' distance ASC '; 
+        $having = " HAVING (distance <= $radius) "; 
+        $photos=Photos::get();
+        // $user = User::get();
+        $properties = DB::select("SELECT  *".$sql_distance." FROM properties $where $having ORDER BY $order_by");  
+        $properties =  properties::get();    
+        //return view('pages.index')->with(['properties'=>$properties, 'photos'=>$photos]);
+ 
 
-        echo $res->country; // United States
-        echo $res->continent; // North America
-        echo $res->latitude; // 37.751
-        echo $res->longitude; // -97.822
-
-        var_dump($res);
-
-        // return view('pages.forsale')->with('locationData',$locationData);
+         //return view('pages.about',compact('locationData'));
     }
+    
 
     public function gettingProperties(Request $request){
-        // $this->validate($request,[
-        //     'searchTextField' => 'required']);
-        $userIp = $request->ip();
-        $locationData = \Location::get($userIp);
-        $latit  = $locationData['latitude'];
-        $longi = $locationData['longitude'];
 
         $client = new \GuzzleHttp\Client();
 
@@ -76,8 +70,6 @@ class PropertyController extends Controller
                 $lat = $ln;
                 $lng =$lt;}
         }
-   
-
         $max_p = $max_price;
         $min_p = $min_price;
         $bed = $rooms;
@@ -102,7 +94,7 @@ class PropertyController extends Controller
         }
         
         $sql_distance = " ,(((acos(sin((".$lat."*pi()/180)) * sin((`properties`.`latitude`*pi()/180))+cos((".$lat."*pi()/180)) * cos((`properties`.`latitude`*pi()/180)) * cos(((".$lng."-`properties`.`longitude`)*pi()/180))))*180/pi())*60*1.1515*1.609344) as distance "; 
-        if ($radius == '15+' || $radius == 'Any'){
+        if ($radius == '15+' || $radius == 'Any' || $radius == null ){
             $having = " HAVING (distance ) "; 
         }else{
             $having = " HAVING (distance <= $radius) "; 
@@ -127,17 +119,11 @@ class PropertyController extends Controller
                 }
                
             }
-                
-            
-        
-
     $order_by = ' distance ASC '; 
     $photos=Photos::get();
     $user = User::get();
-    $properties = DB::select("SELECT  *".$sql_distance." FROM properties $where $having ORDER BY $order_by"); 
-    
-            
-       return view('properties.index')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr, 'min_price'=>$min_price, 'max_price'=>$max_price,'radius'=>$radius, 'rooms'=>$rooms, 'prop_type'=>$prop_type]);
+    $properties = DB::select("SELECT  *".$sql_distance." FROM properties $where $having ORDER BY $order_by");    
+    return view('properties.index')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr, 'min_price'=>$min_price, 'max_price'=>$max_price,'radius'=>$radius, 'rooms'=>$rooms, 'prop_type'=>$prop_type]);
     }
 
     public function propertyCities($city)
@@ -147,9 +133,8 @@ class PropertyController extends Controller
         $where =   "WHERE ( City=$city)";
         // $properties =  properties::find($city);
         $properties = DB::select("SELECT * FROM properties WHERE (City= '$city')");
-
        // with(['properties'=> $user->properties, 'propertiesForRent'=>$user->propertiesForRent])
-       return view('properties.cities')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr]);
+       return view('properties.index')->with(['properties'=>$properties, 'photos'=>$photos, 'user'=>$user,'addr'=>$addr]);
     }
 
     /**
@@ -159,10 +144,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-
-
        $properties =  properties::get();  
-
     //   $properties= properties::whereHas('photos','user',function($query){
     //     $query->where('id', 44);
     //   } );
@@ -197,8 +179,6 @@ class PropertyController extends Controller
             'City' => 'required',
             'Description' => 'required',
             'address' => 'required',
-            
-
             ]);
 
             $client = new \GuzzleHttp\Client();
@@ -287,7 +267,7 @@ class PropertyController extends Controller
     {
         $properties =  properties::find($id);
         if(auth()->user()->id !==$properties->user_id){
-            return redirect('/properties')->with('error', 'Unauthorised Page');
+            return redirect('/')->with('error', 'Unauthorised Page');
 
         }
         return view('properties.edit')-> with('properties',$properties);
@@ -329,7 +309,7 @@ class PropertyController extends Controller
             if ( $confirmation == 'yes'){
                 return view('properties.pictureUpload')->with('properties', $properties);
             }else{
-                return redirect('/properties')->with('success','Property listing updated successfully.....');
+                return redirect('/profile')->with('success','Property listing updated successfully.....');
             }
         
     }
@@ -356,7 +336,7 @@ class PropertyController extends Controller
 
         }
         $properties->delete();
-        return redirect('/properties')->with('success', 'Your listing has been deleted successfully......');
+        return redirect('/profile')->with('success', 'Your listing has been deleted successfully......');
 
     }
 }

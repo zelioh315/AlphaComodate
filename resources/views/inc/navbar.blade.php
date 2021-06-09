@@ -1,5 +1,5 @@
 
-  <nav class="navbar navbar-expand-md  fixed-top  navbar-light ">
+<nav class="navbar navbar-expand-md  fixed-top  navbar-light ">
   {{-- <nav class="navbar navbar-expand-lg "> --}}
     {{-- <nav class="navbar "> --}}
     <div class="container">
@@ -22,7 +22,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/about"><b>About</b><span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/about_us"><b>About</b><span class="sr-only">(current)</span></a>
               </li>
 
               <li class="nav-item active">
@@ -106,7 +106,7 @@
                 <h4 class="modal-title" id="myModalLabel">
                     Login/Registration </h4>
             <li><button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×</button></li>
+                x</button></li>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -253,10 +253,10 @@
                                
                             </div>
                         </div>
-                        <div id="OR" class="hidden-xs">
-                            OR</div>
+                        {{-- <div id="OR" class="hidden-xs">
+                            OR</div> --}}
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <div class="row text-center sign-with">
                             <div class="col-md-12">
                                 <h3>
@@ -269,13 +269,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 

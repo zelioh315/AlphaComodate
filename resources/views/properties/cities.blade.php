@@ -5,7 +5,7 @@
 <div class="col-sm-14">
   <div class="panel panel-default">
     <div class="card bg-secondary text-white">
-        <form method="get" action="{{url('/properties/radius/cityLng/cityLat')}}">
+        <form name="myForm" method="get"  novalidate="novalidate" onsubmit="return validateForm()" class="homepage" action="{{url('/properties/radius/cityLng/cityLat')}}">
             @csrf
             <div class="form-row align-items-center">
               <div class="col-md-3 offset-md-1">
@@ -339,3 +339,13 @@
       {{-- {!! $properties->links() !!} --}}
   </div>     
 @endsection
+
+<script>
+  function validateForm() {
+  var x = document.forms["myForm"]["searchTextField"].value;
+  if (x == "") {
+    alert("Please Enter a Location");
+    return false;
+  }
+}
+  </script>

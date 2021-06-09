@@ -48,7 +48,7 @@
                     {{Form::hidden('_method','DELETE')}}
                     {{Form::submit('Delete', ['class' => "btn btn-danger"])}}
         {!! Form::close() !!}</th>
-        <a href = "/properties/{{$post->id}}/edit" class="btn btn-primary">Edit</a>
+        <a href = "/properties/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
         {{-- <a href="#" class="btn btn-primary">Edit</a> --}}
         </div>
     </div>

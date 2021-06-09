@@ -9,7 +9,7 @@ class profileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index', 'show' ]]);
+        $this->middleware('auth',['except'=>['show' ]]);
     }
     /**
      * Display a listing of the resource.
@@ -52,7 +52,11 @@ class profileController extends Controller
      */
     public function show($user_id){
         $user = User::find($user_id);
-        return view('properties.profile')->with(['properties'=> $user->properties, 'user'=>$user]);
+        if($user){
+            return view('properties.profile')->with(['properties'=> $user->properties, 'user'=>$user]);
+        }else{
+            return redirect('/');//->with('error', 'Unauthorised Page');
+        } 
     }
 
     /**

@@ -3,11 +3,11 @@
 @section('content')
 <br>
 
-    <h1>Create Listing</h1>
+    <h1>Create your Listing</h1>
     {!! Form::open(['action' => 'PropertyController@store', 'method'=> 'POST', 'enctype'=>'multipart/form-data']) !!}
         <div class="form-group">
              {{ Form::label('title', 'Header') }}
-             {{ Form::text('header','',['class' => 'form-control', 'placeholder' => 'e.g 2 bedroom house for sale in walsall'] )}}
+             {{ Form::text('header','',['class' => 'form-control', 'placeholder' => 'e.g 2 bedroom house for rent in walsall'] )}}
         </div>
 
         <div class="form-group">
