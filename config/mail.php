@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'alphacomodate@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'youremail@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'alphacomodate'),
     ],
 
