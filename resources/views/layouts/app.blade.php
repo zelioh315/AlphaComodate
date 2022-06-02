@@ -94,7 +94,7 @@
         CKEDITOR.replace('summary-ckeditor');
 </script> --}}
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvxoZdoTf5GcBFXLOWKVI_jElP7mlU-28&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YourAPIKey"></script>
 <script>
     function initialize() {
         var options = {
