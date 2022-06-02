@@ -85,7 +85,7 @@
                                 }
                               }
                           </script>
-                      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvxoZdoTf5GcBFXLOWKVI_jElP7mlU-28&callback=initMap&libraries=&v=weekly"async></script>
+                      <script src="https://maps.googleapis.com/maps/api/js?key=YourAPIKey"async></script>
                         
                     </div>
 
